@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harvest Track Pro - Perishable Inventory Management</title>    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+<a href="#" class="navbar-brand">
+<i class="fas fa-leaf"></i> HarvestTrack
+</a>
+<div class="navbar-menu">
+<a href="#" class="navbar-item active">Dashboard</a>
+<a href="#" class="navbar-item">Analytics</a>
+<a href="#" class="navbar-item">Reports</a>
+<a href="#" class="navbar-item">Retailer</a>
+<a href="#" class="navbar-item">Settings</a>
+</div>
+
+<div class="navbar-end">
+<div class="notification-icon">
+    <i class="fas fa-bell"></i>
+    <span class="notification-badge">3</span>
+</div>
+
+<div class="user-dropdown">
+    <div class="user-avatar">JD</div>
+    <span class="user-name">John Doe</span>
+    <i class="fas fa-chevron-down dropdown-icon"></i>
+</div>
+</div>
+</nav>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+<ul class="sidebar-menu">
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link active">
+        <i class="fas fa-tachometer-alt sidebar-icon"></i>
+        <span class="sidebar-text">Dashboard</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-box-open sidebar-icon"></i>
+        <span class="sidebar-text">Inventory</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-tractor sidebar-icon"></i>
+        <span class="sidebar-text">Farmer</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-truck sidebar-icon"></i>
+        <span class="sidebar-text">Receiving</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-shipping-fast sidebar-icon"></i>
+        <span class="sidebar-text">Distribution</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-store sidebar-icon"></i>
+        <span class="sidebar-text">Retailer</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-thermometer-half sidebar-icon"></i>
+        <span class="sidebar-text">Storage Monitoring</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-exclamation-triangle sidebar-icon"></i>
+        <span class="sidebar-text">Loss Management</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-chart-line sidebar-icon"></i>
+        <span class="sidebar-text">Analytics</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-file-alt sidebar-icon"></i>
+        <span class="sidebar-text">Reports</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-cog sidebar-icon"></i>
+        <span class="sidebar-text">Settings</span>
+    </a>
+</li>
+</ul>
+</aside>
+
+<button class="sidebar-toggle" id="sidebar-toggle">
+<i class="fas fa-chevron-left" id="toggle-icon"></i>
+</button>
+
+<!-- Main Content -->
+<main class="main-content" id="main-content">
+<div class="page-title">
+<h1>Post Harvest Management Dashboard</h1>
+<div class="action-buttons">
+    <button class="btn btn-outlined">
+        <i class="fas fa-filter btn-icon"></i> Filter
+    </button>
+    <button class="btn btn-primary">
+        <i class="fas fa-plus btn-icon"></i> Add Inventory
+    </button>
+</div>
+</div>
+
+<!-- Dashboard Stats -->
+<div class="dashboard-stats">
+<div class="stat-card">
+    <div class="stat-icon inventory">
+        <i class="fas fa-boxes"></i>
+    </div>
+    <div class="stat-info">
+        <h3>2,547 kg</h3>
+        <p>Current Inventory</p>
+    </div>
+</div>
+
+<div class="stat-card">
+    <div class="stat-icon spoilage">
+        <i class="fas fa-trash-alt"></i>
+    </div>
+    <div class="stat-info">
+        <h3>156 kg</h3>
+        <p>Monthly Loss (6.1%)</p>
+    </div>
+</div>
+
+<div class="stat-card">
+    <div class="stat-icon alerts">
+        <i class="fas fa-exclamation-circle"></i>
+    </div>
+    <div class="stat-info">
+        <h3>7</h3>
+        <p>Storage Alerts</p>
+    </div>
+</div>
+
+<div class="stat-card">
+    <div class="stat-icon savings">
+        <i class="fas fa-dollar-sign"></i>
+    </div>
+    <div class="stat-info">
+        <h3>$2,340</h3>
+        <p>Loss Prevention Savings</p>
+    </div>
+</div>
+</div>
+<!-- Charts and Tables -->
+<div class="grid-2">
+<!-- Loss Tracking Chart -->
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Loss Analysis by Stage</h2>
+        <div>
+            <select class="time-period">
+                <option>Last 7 Days</option>
+                <option>Last 30 Days</option>
+                <option>Last 90 Days</option>
+            </select>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="chart-container">
+            <canvas id="lossChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Storage Conditions -->
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Storage Condition Monitoring</h2>
+        <button class="btn btn-outlined btn-sm">View All</button>
+    </div>
+    <div class="card-body">
+        <div class="storage-zone">
+            <h3>Cold Storage A</h3>
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span>Temperature: 4.2°C</span>
+                    <span>Optimal: 2-6°C</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 70%;"></div>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span>Humidity: 82%</span>
+                    <span>Optimal: 85-95%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 85%;"></div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="storage-zone" style="margin-top: 20px;">
+            <h3>Ripening Room B</h3>
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span>Temperature: 16.8°C</span>
+                    <span class="text-warning">Optimal: 14-16°C</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 95%; background-color: var(--warning);"></div>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span>Humidity: 72%</span>
+                    <span>Optimal: 70-75%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 75%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Inventory Alerts -->
+<div class="card">
+<div class="card-header">
+    <h2 class="card-title">Critical Inventory Alerts</h2>
+    <button class="btn btn-outlined btn-sm">View All</button>
+</div>
+<div class="card-body">
+    <ul class="alert-list">
+        <li class="alert-item">
+            <div class="alert-icon">
+                <i class="fas fa-temperature-high"></i>
+            </div>
+            <div class="alert-content">
+                <h4 class="alert-title">Temperature Alert - Cold Storage A</h4>
+                <p class="alert-message">Temperature risen above threshold (6°C). Currently at 7.2°C. Affects: 340kg of Strawberries.</p>
+                <p class="alert-time">30 minutes ago</p>
+            </div>
+        </li>
+        <li class="alert-item">
+            <div class="alert-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="alert-content">
+                <h4 class="alert-title">Expiration Alert - Tomatoes (Batch T-2304)</h4>
+                <p class="alert-message">120kg of Roma Tomatoes will reach optimal freshness in 2 days. Consider priority distribution.</p>
+                <p class="alert-time">2 hours ago</p>
+            </div>
+        </li>
+        <li class="alert-item">
+            <div class="alert-icon">
+                <i class="fas fa-cloud"></i>
+            </div>
+            <div class="alert-content">
+                <h4 class="alert-title">Humidity Alert - Ripening Room C</h4>
+                <p class="alert-message">Humidity levels below optimal range (65% vs. 70-75% target). Affects: 210kg of Bananas.</p>
+                <p class="alert-time">3 hours ago</p>
+            </div>
+        </li>
+    </ul>
+</div>
+</div>
+
+<!-- Inventory Status -->
+<div class="card">
+<div class="card-header">
+    <h2 class="card-title">Inventory Status</h2>
+    <div>
+        <input type="text" placeholder="Search inventory..." class="search-input">
+    </div>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Batch ID</th>
+                    <th>Quantity</th>
+                    <th>Harvest Date</th>
+                    <th>Storage Location</th>
+                    <th>Freshness Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Strawberries</td>
+                    <td>STR-2304-A</td>
+                    <td>340 kg</td>
+                    <td>Apr 5, 2025</td>
+                    <td>Cold Storage A</td>
+                    <td><span class="status fresh">Fresh</span></td>
+                    <td>
+                        <button class="btn btn-sm"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm"><i class="fas fa-edit"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Roma Tomatoes</td>
+                    <td>T-2304</td>
+                    <td>120 kg</td>
+                    <td>Apr 2, 2025</td>
+                    <td>Room Temperature D</td>
+                    <td><span class="status warning">2 Days Left</span></td>
+                    <td>
+                        <button class="btn btn-sm"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm"><i class="fas fa-edit"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Bananas</td>
+                    <td>BAN-2304-C</td>
+                    <td>210 kg</td>
+                    <td>Apr 3, 2025</td>
+                    <td>Ripening Room C</td>
+                    <td><span class="status warning">Ripening</span></td>
+                    <td>
+                        <button class="btn btn-sm"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm"><i class="fas fa-edit"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Green Apples</td>
+                    <td>APP-2303-G</td>
+                    <td>450 kg</td>
+                    <td>Mar 29, 2025</td>
+                    <td>Cold Storage B</td>
+                    <td><span class="status fresh">Fresh</span></td>
+                    <td>
+                        <button class="btn btn-sm"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm"><i class="fas fa-edit"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Carrots</td>
+                    <td>CAR-2303-B</td>
+                    <td>280 kg</td>
+                    <td>Mar 30, 2025</td>
+                    <td>Root Cellar A</td>
+                    <td><span class="status fresh">Fresh</span></td>
+                    <td>
+                        <button class="btn btn-sm"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm"><i class="fas fa-edit"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+</main>
+<script src="style.js" defer></script>
+</body>
+</html>
