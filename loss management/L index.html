@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harvest Track Pro - Loss Management</title>    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<link rel="stylesheet" href="L style.css">
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+<a href="#" class="navbar-brand">
+<i class="fas fa-leaf"></i> HarvestTrack 
+</a>
+<div class="navbar-menu">
+<a href="#" class="navbar-item">Dashboard</a>
+<a href="#" class="navbar-item">Analytics</a>
+<a href="#" class="navbar-item">Reports</a>
+<a href="#" class="navbar-item">Settings</a>
+</div>
+
+<div class="navbar-end">
+<div class="notification-icon">
+<i class="fas fa-bell"></i>
+<span class="notification-badge">3</span>
+</div>
+
+<div class="user-dropdown">
+<div class="user-avatar">JD</div>
+<span class="user-name">John Doe</span>
+<i class="fas fa-chevron-down dropdown-icon"></i>
+</div>
+</div>
+</nav>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+<ul class="sidebar-menu">
+<li class="sidebar-item">
+<a href="#" class="sidebar-link">
+<i class="fas fa-tachometer-alt sidebar-icon"></i>
+<span class="sidebar-text">Dashboard</span>
+</a>
+</li>
+<li class="sidebar-item">
+<a href="#" class="sidebar-link">
+<i class="fas fa-box-open sidebar-icon"></i>
+<span class="sidebar-text">Inventory</span>
+</a>
+</li>
+<li class="sidebar-item">
+<a href="#" class="sidebar-link">
+<i class="fas fa-tractor sidebar-icon"></i>
+<span class="sidebar-text">Farmer</span>
+</a>
+</li>
+<li class="sidebar-item">
+<a href="#" class="sidebar-link">
+<i class="fas fa-truck sidebar-icon"></i>
+<span class="sidebar-text">Receiving</span>
+</a>
+</li>
+<li class="sidebar-item">
+<a href="#" class="sidebar-link">
+<i class="fas fa-shipping-fast sidebar-icon"></i>
+<span class="sidebar-text">Distribution</span>
+</a>
+</li>
+<li class="sidebar-item">
+<a href="#" class="sidebar-link">
+<i class="fas fa-thermometer-half sidebar-icon"></i>
+<span class="sidebar-text">Storage Monitoring</span>
+</a>
+</li>
+<li class="sidebar-item">
+<a href="#" class="sidebar-link active">
+<i class="fas fa-exclamation-triangle sidebar-icon"></i>
+<span class="sidebar-text">Loss Management</span>
+</a>
+</li>
+<li class="sidebar-item">
+<a href="#" class="sidebar-link">
+<i class="fas fa-chart-line sidebar-icon"></i>
+<span class="sidebar-text">Analytics</span>
+</a>
+</li>
+<li class="sidebar-item">
+<a href="#" class="sidebar-link">
+<i class="fas fa-file-alt sidebar-icon"></i>
+<span class="sidebar-text">Reports</span>
+</a>
+</li>
+<li class="sidebar-item">
+<a href="#" class="sidebar-link">
+<i class="fas fa-cog sidebar-icon"></i>
+<span class="sidebar-text">Settings</span>
+</a>
+</li>
+</ul>
+</aside>
+
+<button class="sidebar-toggle" id="sidebar-toggle">
+<i class="fas fa-chevron-left" id="toggle-icon"></i>
+</button>
+
+<!-- Main Content -->
+<main class="main-content" id="main-content">
+<div class="page-title">
+<h1>Loss Management</h1>
+<div class="action-buttons">
+<button class="btn btn-outlined">
+<i class="fas fa-filter btn-icon"></i> Filter
+</button>
+<button class="btn btn-primary" id="recordLossBtn">
+<i class="fas fa-plus btn-icon"></i> Record Loss
+</button>
+</div>
+</div>
+
+<!-- Dashboard Stats -->
+<div class="dashboard-stats">
+<div class="stat-card">
+<div class="stat-icon spoilage">
+<i class="fas fa-trash-alt"></i>
+</div>
+<div class="stat-info">
+<h3>156 kg</h3>
+<p>Monthly Loss</p>
+</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">
+<i class="fas fa-percentage" style="color: var(--warning); background-color: rgba(255, 152, 0, 0.1);"></i>
+</div>
+<div class="stat-info">
+<h3>6.1%</h3>
+<p>Loss Rate</p>
+</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon savings">
+<i class="fas fa-dollar-sign"></i>
+</div>
+<div class="stat-info">
+<h3>$2,340</h3>
+<p>Loss Value</p>
+</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon" style="background-color: #673ab7; color: white;">
+<i class="fas fa-arrow-trend-down"></i>
+</div>
+<div class="stat-info">
+<h3>12%</h3>
+<p>YoY Improvement</p>
+</div>
+</div>
+</div>
+
+<!-- Tabs -->
+<div class="card">
+<div class="card-header">
+<div class="tabs">
+    <div class="tab active" data-tab="loss-overview">Loss Overview</div>
+    <div class="tab" data-tab="loss-incidents">Loss Incidents</div>
+    <div class="tab" data-tab="prevention-strategies">Prevention Strategies</div>
+</div>
+</div>
+<div class="card-body">
+<!-- Tab Content -->
+<div class="tab-content active" id="loss-overview">
+    <!-- Loss by Category Chart -->
+    <div class="grid-2">
+        <div class="chart-container">
+            <canvas id="lossByCategoryChart"></canvas>
+        </div>
+        
+        <div>
+            <h3>Loss by Category</h3>
+            <div class="loss-category">
+                <div class="loss-color" style="background-color: #e53935;"></div>
+                <div class="loss-details">
+                    <span>Storage Conditions</span>
+                    <span>72 kg (46%)</span>
+                </div>
+            </div>
+            <div class="loss-progress">
+                <div class="loss-progress-bar" style="width: 46%; background-color: #e53935;"></div>
+            </div>
+            
+            <div class="loss-category">
+                <div class="loss-color" style="background-color: #ff9800;"></div>
+                <div class="loss-details">
+                    <span>Transportation Damage</span>
+                    <span>38 kg (24%)</span>
+                </div>
+            </div>
+            <div class="loss-progress">
+                <div class="loss-progress-bar" style="width: 24%; background-color: #ff9800;"></div>
+            </div>
+            
+            <div class="loss-category">
+                <div class="loss-color" style="background-color: #4caf50;"></div>
+                <div class="loss-details">
+                    <span>Quality Rejection</span>
+                    <span>25 kg (16%)</span>
+                </div>
+            </div>
+            <div class="loss-progress">
+                <div class="loss-progress-bar" style="width: 16%; background-color: #4caf50;"></div>
+            </div>
+            
+            <div class="loss-category">
+                <div class="loss-color" style="background-color: #2196f3;"></div>
+                <div class="loss-details">
+                    <span>Expiration</span>
+                    <span>21 kg (14%)</span>
+                </div>
+            </div>
+            <div class="loss-progress">
+                <div class="loss-progress-bar" style="width: 14%; background-color: #2196f3;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loss Trend Chart -->
+    <div style="margin-top: 2rem;">
+        <h3>Loss Trend (Last 12 Months)</h3>
+        <div class="filter-group">
+            <select class="filter-select">
+                <option>All Categories</option>
+                <option>Storage Conditions</option>
+                <option>Transportation Damage</option>
+                <option>Quality Rejection</option>
+                <option>Expiration</option>
+            </select>
+            
+            <select class="filter-select">
+                <option>All Products</option>
+                <option>Strawberries</option>
+                <option>Tomatoes</option>
+                <option>Bananas</option>
+                <option>Apples</option>
+                <option>Carrots</option>
+            </select>
+        </div>
+        <div class="chart-container">
+            <canvas id="lossTrendChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="tab-content" id="loss-incidents">
+    <div class="filter-group">
+        <input type="text" placeholder="Search incidents..." class="search-input">
+        <select class="filter-select">
+            <option>All Categories</option>
+            <option>Storage Conditions</option>
+            <option>Transportation Damage</option>
+            <option>Quality Rejection</option>
+            <option>Expiration</option>
+        </select>
+        <select class="filter-select">
+            <option>Last 30 Days</option>
+            <option>Last 90 Days</option>
+            <option>This Year</option>
+            <option>All Time</option>
+        </select>
+    </div>
+    
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Batch ID</th>
+                    <th>Quantity Lost</th>
+                    <th>Loss Category</th>
+                    <th>Value</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Apr 15, 2025</td>
+                    <td>Strawberries</td>
+                    <td>STR-2304-A</td>
+                    <td>28 kg</td>
+                    <td><span class="status danger">Storage Conditions</span></td>
+                    <td>$560</td>
+                    <td>
+                        <button class="btn btn-sm"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm"><i class="fas fa-edit"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Apr 12, 2025</td>
+                    <td>Roma Tomatoes</td>
+                    <td>T-2304-B</td>
+                    <td>15 kg</td>
+                    <td><span class="status" style="background-color: rgba(33, 150, 243, 0.1); color: #2196f3;">Expiration</span></td>
+                    <td>$225</td>
+                    <td>
+                        <button class="btn btn-sm"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm"><i class="fas fa-edit"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Apr 10, 2025</td>
+                    <td>Bananas</td>
+                    <td>BAN-2304-A</td>
+                    <td>32 kg</td>
+                    <td><span class="status warning">Transportation Damage</span></td>
+                    <td>$384</td>
+                    <td>
+                        <button class="btn btn-sm"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm"><i class="fas fa-edit"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Apr 8, 2025</td>
+                    <td>Green Apples</td>
+                    <td>APP-2303-G</td>
+                    <td>18 kg</td>
+                    <td><span class="status fresh">Quality Rejection</span></td>
+                    <td>$270</td>
+                    <td>
+                        <button class="btn btn-sm"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm"><i class="fas fa-edit"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Apr 5, 2025</td>
+                    <td>Strawberries</td>
+                    <td>STR-2303-B</td>
+                    <td>22 kg</td>
+                    <td><span class="status danger">Storage Conditions</span></td>
+                    <td>$440</td>
+                    <td>
+                        <button class="btn btn-sm"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm"><i class="fas fa-edit"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="tab-content" id="prevention-strategies">
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-header">
+                <h3>Top Loss Categories</h3>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="height: 250px;">
+                    <canvas id="topLossCategoriesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Recommended Actions</h3>
+            </div>
+            <div class="card-body">
+                <ul style="padding-left: 1.2rem;">
+                    <li><strong>Improve Cold Storage</strong> – Address inconsistent temperatures to reduce spoilage.</li>
+                    <li><strong>Train Handlers</strong> – Reduce damage during transportation and packaging.</li>
+                    <li><strong>Enhance QC Standards</strong> – Introduce better grading to limit quality rejection.</li>
+                    <li><strong>Optimize Logistics</strong> – Faster distribution to reduce expiration risks.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="L style.js" defer></script>
+</body>
+</html>
