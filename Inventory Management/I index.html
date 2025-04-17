@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HarvestTrack Pro - Inventory Management</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<link rel="stylesheet" href="I style.css">
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+<a href="#" class="navbar-brand">
+<i class="fas fa-leaf"></i> HarvestTrack Pro
+</a>
+
+<div class="navbar-menu">
+<a href="#" class="navbar-item">Dashboard</a>
+<a href="#" class="navbar-item active">Inventory</a>
+<a href="#" class="navbar-item">Analytics</a>
+<a href="#" class="navbar-item">Reports</a>
+<a href="#" class="navbar-item">Settings</a>
+</div>
+
+<div class="navbar-end">
+<div class="notification-icon">
+    <i class="fas fa-bell"></i>
+    <span class="notification-badge">3</span>
+</div>
+
+<div class="user-dropdown" id="user-dropdown">
+    <div class="user-avatar" id="user-avatar-display">JD</div>
+    <span class="user-name" id="user-name-display">John Doe</span>
+    <i class="fas fa-chevron-down dropdown-icon"></i>
+</div>
+</div>
+</nav>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+<ul class="sidebar-menu">
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-tachometer-alt sidebar-icon"></i>
+        <span class="sidebar-text">Dashboard</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link active">
+        <i class="fas fa-box-open sidebar-icon"></i>
+        <span class="sidebar-text">Inventory</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-truck sidebar-icon"></i>
+        <span class="sidebar-text">Receiving</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-shipping-fast sidebar-icon"></i>
+        <span class="sidebar-text">Distribution</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-thermometer-half sidebar-icon"></i>
+        <span class="sidebar-text">Storage Monitoring</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-exclamation-triangle sidebar-icon"></i>
+        <span class="sidebar-text">Loss Management</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-chart-line sidebar-icon"></i>
+        <span class="sidebar-text">Analytics</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-file-alt sidebar-icon"></i>
+        <span class="sidebar-text">Reports</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-users sidebar-icon"></i>
+        <span class="sidebar-text">Suppliers</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link">
+        <i class="fas fa-cog sidebar-icon"></i>
+        <span class="sidebar-text">Settings</span>
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link" id="logout-link">
+        <i class="fas fa-sign-out-alt sidebar-icon"></i>
+        <span class="sidebar-text">Logout</span>
+    </a>
+</li>
+</ul>
+</aside>
+
+<button class="sidebar-toggle" id="sidebar-toggle">
+<i class="fas fa-chevron-left" id="toggle-icon"></i>
+</button>
+
+<!-- Main Content -->
+<main class="main-content" id="main-content">
+<div class="page-title">
+<h1>Inventory Management</h1>
+<div class="action-buttons">
+    <button class="btn btn-outlined" id="filter-toggle-btn">
+        <i class="fas fa-filter btn-icon"></i> Filter
+    </button>
+    <button class="btn btn-primary" id="add-inventory-btn">
+        <i class="fas fa-plus btn-icon"></i> Add Inventory
+    </button>
+</div>
+</div>
+
+<!-- Filter Controls -->
+<div class="filter-controls" id="filter-controls">
+<div class="filter-group">
+    <label for="category-filter">Category</label>
+    <select id="category-filter">
+        <option value="">All Categories</option>
+        <option value="fruits">Fruits</option>
+        <option value="vegetables">Vegetables</option>
+        <option value="dairy">Dairy</option>
+        <option value="meat">Meat</option>
+        <option value="seafood">Seafood</option>
+    </select>
+</div>
+
+<div class="filter-group">
+    <label for="status-filter">Status</label>
+    <select id="status-filter">
+        <option value="">All Status</option>
+        <option value="fresh">Fresh</option>
+        <option value="good">Good</option>
+        <option value="expiring">Expiring Soon</option>
+        <option value="expired">Expired</option>
+        <option value="low">Low Stock</option>
+    </select>
+</div>
+
+<div class="filter-group">
+    <label for="supplier-filter">Supplier</label>
+    <select id="supplier-filter">
+        <option value="">All Suppliers</option>
+        <option value="farmfresh">Farm Fresh Co-op</option>
+        <option value="organicvalley">Organic Valley</option>
+        <option value="greenharvest">Green Harvest</option>
+        <option value="localfarms">Local Farms Inc.</option>
+    </select>
+</div>
+
+<div class="search-bar">
+    <input type="text" id="search-input" placeholder="Search inventory...">
+    <button id="search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</div>
+</div>
+
+<!-- Inventory Stats -->
+<div class="inventory-stats">
+<div class="stat-card">
+    <div class="stat-icon total-items">
+        <i class="fas fa-boxes"></i>
+    </div>
+    <div class="stat-info">
+        <h3>124</h3>
+        <p>Total Items</p>
+    </div>
+</div>
+
+<div class="stat-card">
+    <div class="stat-icon expiring-soon">
+        <i class="fas fa-exclamation-circle"></i>
+    </div>
+    <div class="stat-info">
+        <h3>15</h3>
+        <p>Expiring Soon</p>
+    </div>
+</div>
+
+<div class="stat-card">
+    <div class="stat-icon low-stock">
+        <i class="fas fa-battery-quarter"></i>
+    </div>
+    <div class="stat-info">
+        <h3>8</h3>
+        <p>Low Stock Items</p>
+    </div>
+</div>
+
+<div class="stat-card">
+    <div class="stat-icon value">
+        <i class="fas fa-dollar-sign"></i>
+    </div>
+    <div class="stat-info">
+        <h3>$23,840</h3>
+        <p>Total Value</p>
+    </div>
+</div>
+</div>
+
+<!-- Inventory Table -->
+<div class="inventory-table-wrapper">
+<table class="inventory-table" id="inventory-table">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Category</th>
+            <th>Stock (kg)</th>
+            <th>Storage Location</th>
+            <th>Expiry Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Table rows will be populated by JavaScript -->
+    </tbody>
+</table>
+
+<div class="pagination" id="pagination">
+    <!-- Pagination will be populated by JavaScript -->
+</div>
+</div>
+</main>
+
+<!-- Add/Edit Inventory Modal -->
+<div class="modal-backdrop" id="inventory-modal-backdrop">
+<div class="modal">
+<div class="modal-header">
+    <h2 class="modal-title" id="modal-title">Add New Inventory</h2>
+    <button class="modal-close" id="modal-close">×</button>
+</div>
+<div class="modal-body">
+    <form id="inventory-form">
+        <input type="hidden" id="inventory-id">
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="item-name">Item Name</label>
+                <input type="text" id="item-name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="item-category">Category</label>
+                <select id="item-category" required>
+                    <option value="" disabled selected>Select category</option>
+                    <option value="fruits">Fruits</option>
+                    <option value="vegetables">Vegetables</option>
+                    <option value="dairy">Dairy</option>
+                    <option value="meat">Meat</option>
+                    <option value="seafood">Seafood</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="item-quantity">Quantity (kg)</label>
+                <input type="number" id="item-quantity" min="0" step="0.1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="item-price">Price per kg ($)</label>
+                <input type="number" id="item-price" min="0" step="0.01" required>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="item-location">Storage Location</label>
+                <select id="item-location" required>
+                    <option value="" disabled selected>Select location</option>
+                    <option value="cold-storage-1">Cold Storage 1</option>
+                    <option value="cold-storage-2">Cold Storage 2</option>
+                    <option value="dry-storage">Dry Storage</option>
+                    <option value="freezer-1">Freezer 1</option>
+                    <option value="freezer-2">Freezer 2</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="item-supplier">Supplier</label>
+                <select id="item-supplier" required>
+                    <option value="" disabled selected>Select supplier</option>
+                    <option value="farmfresh">Farm Fresh Co-op</option>
+                    <option value="organicvalley">Organic Valley</option>
+                    <option value="greenharvest">Green Harvest</option>
+                    <option value="localfarms">Local Farms Inc.</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="item-harvest-date">Harvest Date</label>
+                <input type="date" id="item-harvest-date" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="item-expiry-date">Expiry Date</label>
+                <input type="date" id="item-expiry-date" required>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="item-notes">Notes</label>
+            <textarea id="item-notes"></textarea>
+            <div class="hint">Add any additional information about the item's quality, storage requirements, etc.</div>
+        </div>
+    </form>
+    <script src="i style.js" ></script>
+</div>
+</div>
+</html>
