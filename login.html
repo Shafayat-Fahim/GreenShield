@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HarvestTrack - Perishable Inventory Management</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <div class="auth-container">
+    <div class="left-panel">  
+      <div class="branding-content">
+        <h1>HarvestTrack Pro</h1>
+        <p>Inventory Management and Post Harvest Loss Management System for Perishable Goods</p>
+        <img src="Capture.PNG" alt="Fresh produce management" class="hero-image">
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="tabs">
+        <div class="tab active" id="login-tab" onclick="switchToLogin()">Login</div>
+        <div class="tab" id="signup-tab" onclick="switchToSignup()">Sign Up</div>
+      </div>
+
+      <!-- Login Form -->
+      <div class="form-container active" id="login-form">
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" placeholder="2222029@gmail.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" placeholder="••••••••" required>
+          </div>
+
+          <div class="form-group">
+            <label for="login-service">Service Role</label>
+            <select id="login-service" required>
+              <option value="" disabled selected>Select your service role</option>
+              <option value="farmer">Farmer</option>
+              <option value="warehouse-manager">Warehouse Manager</option>
+              <option value="retailer">Retailer</option>
+              <option value="distributor">Distributor</option>
+              <option value="driver">Driver</option>
+            </select>
+          </div>
+
+          <div class="remember-forgot">
+            <label class="remember-me">
+              <input type="checkbox"> Remember me
+            </label>
+            <a href="#" class="forgot-password">Forgot Password?</a>
+          </div>
+          
+          <button type="submit" class="submit-btn">Login</button>
+        </form>
+
+        <div class="or-divider">OR</div>
+        <div class="social-login">
+          <button class="social-btn"><i class="fab fa-facebook-f"></i></button>
+          <button class="social-btn"><i class="fab fa-google"></i></button>
+          <button class="social-btn"><i class="fab fa-apple"></i></button>
+        </div>
+      </div>
+
+      <!-- Signup Form -->
+      <div class="form-container" id="signup-form">
+        <form id="signupForm">
+          <div class="form-group">
+            <label for="signup-name">Full Name</label>
+            <input type="text" id="signup-name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="signup-service">Service Role</label>
+            <select id="signup-service" required>
+              <option value="" disabled selected>Select your service role</option>
+              <option value="farmer">Farmer</option>
+              <option value="warehouse-manager">Warehouse Manager</option>
+              <option value="retailer">Retailer</option>
+              <option value="distributor">Distributor</option>
+              <option value="driver">Driver</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" required>
+          </div>
+
+          <div class="form-group">
+            <label for="signup-confirm">Confirm Password</label>
+            <input type="password" id="signup-confirm" required>
+          </div>
+
+          <button type="submit" class="submit-btn">Sign Up</button>
+        </form>
+
+        <div class="or-divider">OR</div>
+        <div class="social-login">
+          <button class="social-btn"><i class="fab fa-facebook-f"></i></button>
+          <button class="social-btn"><i class="fab fa-google"></i></button>
+          <button class="social-btn"><i class="fab fa-apple"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>
